@@ -8,6 +8,8 @@ from django.conf import settings
 from datetime import datetime, timedelta
 from django.utils import timezone
 
+from news.forms import BAD_WORDS
+
 
 @pytest.fixture
 def author(django_user_model):
@@ -87,3 +89,17 @@ def comment(news, author):
         pk=2,
     )
     return comment
+
+
+@pytest.fixture
+def comment_form_data(news):
+    return {
+        'text': 'Совершенно новый комментарий',
+    }
+
+
+@pytest.fixture
+def bad_words_data():
+    return {
+        'text': f'Какой то текст, {BAD_WORDS[0]}, еще текст.'
+    }
